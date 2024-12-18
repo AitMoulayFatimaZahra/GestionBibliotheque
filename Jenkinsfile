@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         MAVEN_HOME = tool 'Maven'
-        PATH = "C:/Program Files/Git/cmd;${env.PATH}"
+        PATH = "C:/Program Files/Git/usr/bin:${env.PATH}"
     }
 
     stages {
@@ -13,18 +13,18 @@ pipeline {
         }
         stage('Build') {
             steps {
-                bat '${MAVEN_HOME}/bin/mvn clean compile'
+                sh '${MAVEN_HOME}/bin/mvn clean compile'
             }
         }
         stage('Test') {
             steps {
-                bat '${MAVEN_HOME}/bin/mvn test'
+                sh '${MAVEN_HOME}/bin/mvn test'
             }
         }
         stage('Quality Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    bat '${MAVEN_HOME}/bin/mvn sonar:sonar'
+                    sh '${MAVEN_HOME}/bin/mvn sonar:sonar'
                 }
             }
         }
