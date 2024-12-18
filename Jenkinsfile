@@ -10,11 +10,9 @@ pipeline {
                 git 'https://github.com/AitMoulayFatimaZahra/GestionBibliotheque.git'
             }
         }
-        stage('Check Maven Version') {
+        stage('Test bat') {
             steps {
-                script {
-                    bat "mvn -v"
-                }
+                bat 'echo Hello World'
             }
         }
         stage('Build') {
