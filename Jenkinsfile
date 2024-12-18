@@ -11,13 +11,10 @@ pipeline {
             }
         }
         stage('Build') {
-            script {
-            def mvnReturnCode = bat(script: '"${MAVEN_HOME}/bin/mvn" clean compile', returnStatus: true)
-            echo "Maven build finished with return code: ${mvnReturnCode}"
-            if (mvnReturnCode != 0) {
-                error "Maven build failed with return code: ${mvnReturnCode}"
+             steps {
+                echo "Running Maven build..."
+                bat '"${MAVEN_HOME}/bin/mvn" clean compile'
             }
-        }
         }
         stage('Test') {
             steps {
