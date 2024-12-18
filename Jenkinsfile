@@ -13,7 +13,7 @@ pipeline {
         stage('Check Maven Version') {
             steps {
                 script {
-                    sh "${MAVEN_HOME}/bin/mvn -v"
+                    bat "mvn -v"
                 }
             }
         }
