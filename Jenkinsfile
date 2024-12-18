@@ -10,10 +10,17 @@ pipeline {
                 git 'https://github.com/AitMoulayFatimaZahra/GestionBibliotheque.git'
             }
         }
+        stage('Check Maven Version') {
+            steps {
+                script {
+                    sh "${MAVEN_HOME}/bin/mvn -v"
+                }
+            }
+        }
         stage('Build') {
              steps {
                 echo "Running Maven build..."
-                bat '"${MAVEN_HOME}/bin/mvn" -X clean compile'
+                bat '"${MAVEN_HOME}/bin/mvn" clean compile'
 
             }
         }
