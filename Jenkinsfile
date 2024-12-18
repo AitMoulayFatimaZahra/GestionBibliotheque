@@ -2,7 +2,9 @@ pipeline {
     agent any
     environment {
         MAVEN_HOME = tool 'Maven'
+        PATH = "C:/Program Files/Git/cmd;${env.PATH}"
     }
+}
     stages {
         stage('Checkout') {
             steps {
