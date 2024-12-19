@@ -12,7 +12,9 @@ pipeline {
         }
         stage('Test bat') {
             steps {
-                bat 'echo Hello World'
+               withEnv(['PATH=C:\\Program Files\\Git\\cmd;%PATH%']) {
+                    bat 'echo PATH=%PATH%'
+                }
             }
         }
         stage('Build') {
