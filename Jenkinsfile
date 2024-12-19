@@ -14,8 +14,7 @@ pipeline {
         stage('Build') {
              steps {
                 echo "Running Maven build..."
-                sh '"${MAVEN_HOME}/bin/mvn" clean compile'
-
+                 bat "\"${MAVEN_HOME}\\bin\\mvn\" clean compile"
             }
         }
         stage('Test') {
