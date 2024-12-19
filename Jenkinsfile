@@ -10,31 +10,23 @@ pipeline {
                 git 'https://github.com/AitMoulayFatimaZahra/GestionBibliotheque.git'
             }
         }
-        stage('Test bat') {
-            steps {
-               
-                 dir('GestionBibliothèque') {
-                    bat "echo hello"
-                }
-                
-            }
-        }
+        
         stage('Build') {
              steps {
                 echo "Running Maven build..."
-                bat '"${MAVEN_HOME}/bin/mvn" clean compile'
+                sh '"${MAVEN_HOME}/bin/mvn" clean compile'
 
             }
         }
         stage('Test') {
             steps {
-                bat '${MAVEN_HOME}/bin/mvn test'
+                sh '${MAVEN_HOME}/bin/mvn test'
             }
         }
         stage('Quality Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    bat '${MAVEN_HOME}/bin/mvn sonar:sonar'
+                    sh '${MAVEN_HOME}/bin/mvn sonar:sonar'
                 }
             }
         }
