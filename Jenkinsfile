@@ -13,8 +13,9 @@ pipeline {
         stage('Test bat') {
             steps {
                
-                  dir ('GestionBibliothèque')
-                      bat "echo hello"
+                 dir('GestionBibliothèque') {
+                    bat "echo hello"
+                }
                 
             }
         }
