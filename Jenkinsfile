@@ -10,6 +10,12 @@ pipeline {
                 git 'https://github.com/AitMoulayFatimaZahra/GestionBibliotheque.git'
             }
         }
+
+        stage('Test Shell') {
+            steps {
+                sh 'echo "Hello from Git Bash!"'
+            }
+        }
         
         stage('Build') {
              steps {
