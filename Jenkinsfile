@@ -10,12 +10,6 @@ pipeline {
                 git 'https://github.com/AitMoulayFatimaZahra/GestionBibliotheque.git'
             }
         }
-
-        stage('Test Shell') {
-            steps {
-                bat 'echo Hello'
-            }
-        }
         
         stage('Build') {
              steps {
