@@ -13,7 +13,7 @@ pipeline {
 
         stage('Test Shell') {
             steps {
-                sh 'echo "Hello from Git Bash!"'
+                bat 'echo Hello'
             }
         }
         
@@ -25,13 +25,13 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh '${MAVEN_HOME}/bin/mvn test'
+                bat '${MAVEN_HOME}/bin/mvn test'
             }
         }
         stage('Quality Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh '${MAVEN_HOME}/bin/mvn sonar:sonar'
+                    bat '${MAVEN_HOME}/bin/mvn sonar:sonar'
                 }
             }
         }
