@@ -1,7 +1,7 @@
 pipeline {
     agent any
-    environment {
-        MAVEN_HOME = tool 'Maven'
+    tools {
+            maven 'Maven' // Nom donné dans la configuration des outils Maven
     }
 
     stages {
@@ -13,19 +13,27 @@ pipeline {
         
         stage('Build') {
              steps {
-                echo "Running Maven build..."
-                 bat '${MAVEN_HOME}/bin/mvn clean compile'
+                echo 'Compilation du projet avec Maven...'
+                 bat 'mvn clean compile'
             }
         }
         stage('Test') {
             steps {
-                bat '${MAVEN_HOME}/bin/mvn test'
+                echo 'Exécution des tests unitaires...'
+                bat 'mvn test'
             }
+        }
+        stage('Package') {
+                    steps {
+                        echo "Packaging du projet en fichier JAR ..."
+                        bat 'mvn package'
+                    }
         }
         stage('Quality Analysis') {
             steps {
+                echo 'Analyse de la qualite du code avec SonarQube...'
                 withSonarQubeEnv('SonarQube') {
-                    bat '${MAVEN_HOME}/bin/mvn sonar:sonar'
+                    bat 'mvn sonar:sonar'
                 }
             }
         }
@@ -36,6 +44,11 @@ pipeline {
         }
     }
     post {
+        always {
+                    echo 'Pipeline terminé.'
+                    junit '/target/surefire-reports/*.xml'
+                }
+
         success {
             emailext to: 'fatimazahra200115@gmail.com',
                 subject: 'Build Success',
